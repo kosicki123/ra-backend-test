@@ -14,5 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add MongoDB native driver dependency
 - Add Dotenv dependency
 - Add Compression dependency
+- Add .env template
+- Add .gitignore
+- Add README
+- Add CHANGELOG
+- Add Health check route
+- Add MongoDB connect configuration
+- Add MongoDB reuse pool
 
+### Removed
 
+- Remove unused dependencies
+- Remove parts of express-generator template
