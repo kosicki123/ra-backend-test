@@ -1,27 +1,26 @@
 const { MongoClient } = require('mongodb')
 
-const state = {
-	db: null
+let db = null
+
+module.exports.connect = async options => {
+	try {
+		if (db) return
+
+		const client = await MongoClient.connect(options.host, options.options)
+		db = client.db(options.dbName)
+	} catch (error) {
+		throw error
+	}
 }
 
-exports.connect = (options) => {
-	if (state.db) return
-
-	return MongoClient.connect(options.host, options.options, (err, client) => {
-		if (err) throw err
-		state.db = client.db(options.dbName)
-	})
+module.exports.db = () => {
+	return db
 }
 
-exports.get = () => {
-	return state.db
-}
-
-exports.close = (done) => {
-	if (state.db) {
-		state.db.close((err) => {
-			state.db = null
-			state.mode = null
+module.exports.close = done => {
+	if (db) {
+		db.close((err) => {
+			db = null
 			done(err)
 		})
 	}

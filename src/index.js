@@ -1,5 +1,6 @@
 const server = require('./server/server')
 const db = require('../src/config/db')
+
 const { serverSettings, dbSettings } = require('./config/config')
 
 const init = async () => {
