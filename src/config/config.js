@@ -1,5 +1,13 @@
 const serverSettings = {
-  port: process.env.PORT || 3000
+  port: process.env.PORT
 }
 
-module.exports = Object.assign({}, { serverSettings })
+const dbSettings = {
+  host: process.env.MONGO_DB_HOST,
+	dbName: process.env.MONGO_DB_NAME,
+  options: {
+	  useNewUrlParser: true
+  }
+}
+
+module.exports = Object.assign({}, { serverSettings, dbSettings })
