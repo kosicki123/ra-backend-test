@@ -4,7 +4,7 @@ const state = {
 	db: null
 }
 
-exports.connect = (options, done) => {
+exports.connect = (options) => {
 	if (state.db) return
 
 	return MongoClient.connect(options.host, options.options, (err, client) => {
