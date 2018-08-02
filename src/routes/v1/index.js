@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../../config/db')
 
-/* GET home page. */
 router.get('/', (req, res) => {
 	res.end()
 })
