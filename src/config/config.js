@@ -10,4 +10,8 @@ const dbSettings = {
   }
 }
 
-module.exports = Object.assign({}, { serverSettings, dbSettings })
+const appSettings = {
+	googleSecretKey: process.env.GOOGLE_MAPS_SECRET_KEY
+}
+
+module.exports = Object.assign({}, { serverSettings, dbSettings, appSettings })

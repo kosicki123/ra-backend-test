@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const server = require('./server/server')
 const db = require('../src/config/db')
 

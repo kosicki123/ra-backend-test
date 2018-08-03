@@ -7,8 +7,11 @@ class ComplaintRepository {
 			.save(body)
 	}
 
-	async findComplaintsByCity() {
-
+	async findComplaintsByCity(coordinates) {
+		return await db()
+			.collection('complaints')
+			.find({ locale: coordinates})
+			.toArray()
 	}
 }
 

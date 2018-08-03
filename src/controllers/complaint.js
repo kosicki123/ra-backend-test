@@ -1,5 +1,5 @@
 const HTTPStatus = require('http-status')
-const responseHelper = require('../helpers/response')
+const { appSettings } = require('../config/config')
 
 class ComplaintController {
 	constructor(repository) {
@@ -18,10 +18,29 @@ class ComplaintController {
 
 	async findComplaintsByCity(req, res) {
 		try {
-			// TODO: use Google's geocoding service to get coordinates based on the address
-			await this.repository.findComplaintsByCity(req.body)
-			return res.sendStatus(HTTPStatus.OK)
-		} catch (error) {
+			// Instantiate Maps Client
+			const googleMapsClient = require('@google/maps').createClient({
+				key: appSettings.googleSecretKey
+			})
+
+			// Geocode an address.
+			googleMapsClient.geocode({
+				address: req.query.address
+			}, async (error, response) => {
+				if (error)
+					return res.json({ error: error.message })
+
+				if (response.json.results.length === 0)
+					return res.json({ message: 'address not found.' })
+				response.json.results[0].geometry = undefined
+				let coordinates = response.json.results[0].geometry.location
+				if (coordinates) {
+					const result = await this.repository.findComplaintsByCity(coordinates)
+					res.json(result)
+				}
+			})
+		} catch
+			(error) {
 			console.log(error)
 			res.sendStatus(HTTPStatus.INTERNAL_SERVER_ERROR)
 		}

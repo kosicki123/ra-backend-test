@@ -7,6 +7,7 @@ const complaintController = new ComplaintController(complaintRepository)
 const router = express.Router()
 
 router.route('/')
+	.get(complaintController.findComplaintsByCity.bind(complaintController))
 	.post(complaintController.save.bind(complaintController))
 
 module.exports = router
