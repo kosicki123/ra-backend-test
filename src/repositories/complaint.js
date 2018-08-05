@@ -1,18 +1,28 @@
 const { db } = require('../config/db')
 
 class ComplaintRepository {
-	async save(body) {
-		return await db()
-			.collection('complaints')
-			.save(body)
-	}
+  static async save(body) {
+    return await db()
+      .collection('complaints')
+      .save(body)
+  }
 
-	async findComplaintsByCity(coordinates) {
-		return await db()
-			.collection('complaints')
-			.find({ locale: coordinates})
-			.toArray()
-	}
+  static async findComplaintsByCoordinates(coordinates, distanceInMeters) {
+    return await db()
+      .collection('complaints')
+      .find({
+        location: {
+          $nearSphere: {
+            $geometry: {
+              type: 'Point',
+              coordinates: [coordinates.lat, coordinates.lng]
+            },
+            $maxDistance: distanceInMeters
+          }
+        }
+      })
+      .toArray()
+  }
 }
 
 module.exports = ComplaintRepository

@@ -4,14 +4,14 @@ const serverSettings = {
 
 const dbSettings = {
   host: process.env.MONGO_DB_HOST,
-	dbName: process.env.MONGO_DB_NAME,
+  dbName: process.env.MONGO_DB_NAME,
   options: {
-	  useNewUrlParser: true
+    useNewUrlParser: true
   }
 }
 
 const appSettings = {
-	googleSecretKey: process.env.GOOGLE_MAPS_SECRET_KEY
+  googleSecretKey: process.env.GOOGLE_MAPS_SECRET_KEY
 }
 
 module.exports = Object.assign({}, { serverSettings, dbSettings, appSettings })
