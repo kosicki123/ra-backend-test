@@ -7,8 +7,6 @@ const compression = require('compression')()
 
 const routes = require('../routes/v1')
 
-require('dotenv').config()
-
 process.on('uncaughtException', (error) => {
 	//Automatically sends error information to Stackdriver
 	console.error('Unhandled Exception', error.message)

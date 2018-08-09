@@ -1,9 +1,7 @@
 const express = require('express')
+const complaintRouter = require('../../routes/v1/complaint')
 const router = express.Router()
-const db = require('../../config/db')
 
-router.get('/', (req, res) => {
-	res.end()
-})
+router.use('/complaint', complaintRouter)
 
 module.exports = router
