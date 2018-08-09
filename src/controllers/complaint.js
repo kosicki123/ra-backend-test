@@ -13,8 +13,7 @@ class ComplaintController {
       await this.repository.save(req.body)
       return res.sendStatus(HTTPStatus.CREATED)
     } catch (error) {
-      console.log(error)
-      res.sendStatus(HTTPStatus.INTERNAL_SERVER_ERROR)
+      res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({ error: error.message })
     }
   }
 
