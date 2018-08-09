@@ -22,7 +22,27 @@ It's necessary to activate the [Geocoding API](https://console.cloud.google.com/
 
 Also, a [Google Geocoding API Credential](https://console.cloud.google.com/apis/credentials) is required in order to correctly use this application.
 
+There're two requests created, one to ingest complaints and another to find complaints by city, addres or even building name.
+Virtually, anything that Google can find the Geocoding latitude and longitude.
 
+##### GET: api/v1/complaint?address=rua%20elvira%20ferraz&distance=1000
+
+##### POST: api/v1/complaint
+```javascript
+{
+    "title": "Meu produto não foi entregue",
+    "description": "Olá, meu produto não foi entregue na data combinada. Estou extremamente desapontado com a empresa! Gostaria de chegar a uma solução pacífica, mas a empresa não demonstra interesse em me atender",
+    "location": {
+        "type": "Point",
+        "coordinates": [
+            -23.5946175,
+            -46.6819188
+        ]
+    },
+    "company": "Polishop"
+}
+
+```
 
 #### Releases
 
