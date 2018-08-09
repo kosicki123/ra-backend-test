@@ -18,6 +18,12 @@ $ npm install
 
 After installing the dependencies, you must rename the .env.sample file to .env. Then, replace the .env values with your production variables.
 
+It's necessary to activate the [Geocoding API](https://console.cloud.google.com/apis/library/geocoding-backend.googleapis.com).
+
+Also, a [Google Geocoding API Credential](https://console.cloud.google.com/apis/credentials) is required in order to correctly use this application.
+
+
+
 #### Releases
 
 For the versions available, see the [tags on this repository](https://github.com/kosicki123/ra-backend-test/tags) and [Changelog](./CHANGELOG.md) file.
