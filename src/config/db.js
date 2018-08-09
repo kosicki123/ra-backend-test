@@ -1,4 +1,4 @@
-const { MongoClient, Logger } = require('mongodb')
+const { MongoClient } = require('mongodb')
 
 let db = null
 
@@ -7,13 +7,8 @@ module.exports.connect = async options => {
 		if (db) return
 
 		const client = await MongoClient.connect(options.host, options.options)
-
-		if (process.env.NODE_ENV === 'test') {
-			Logger.setLevel('debug')
-			Logger.filter('class', ['Cursor'])
-		}
-
 		db = client.db(options.dbName)
+		await createLocationIndex(db)
 	} catch (error) {
 		throw error
 	}
@@ -24,10 +19,21 @@ module.exports.db = () => {
 }
 
 module.exports.close = done => {
-	if (db) {
-		db.close((err) => {
-			db = null
-			done(err)
-		})
+	if (!db) return
+	db.close((err) => {
+		db = null
+		done(err)
+	})
+}
+
+const createLocationIndex = async () => {
+	try {
+		await db
+			.collection('complaints')
+			.createIndex({
+				location: '2dsphere'
+			})
+	} catch (error) {
+		throw error
 	}
 }

@@ -5,7 +5,7 @@ const GoogleMapsController = require('../services/maps')
 class ComplaintController {
   constructor(repository) {
     this.repository = repository
-    this.mapsController = new GoogleMapsController(appSettings.googleSecretKey)
+	  this.mapsController = new GoogleMapsController(appSettings.googleSecretKey)
   }
 
   async save(req, res) {
